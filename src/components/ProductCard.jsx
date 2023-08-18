@@ -27,12 +27,16 @@ const ProductContainer = styled.div`
 
   h1 {
     font-size: 18px;
-    font-weight: 500;
-  }
+    font-weight: 400;
 
+  }
   h2 {
     font-size: 18px;
     font-weight: 600;
+  }
+
+  h1, h2 {
+    color: #000000;
   }
 `;
 
