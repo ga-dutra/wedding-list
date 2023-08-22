@@ -1,10 +1,10 @@
 import { Navigate, BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./styles/globalStyles";
 import { UserStorage } from "./context/UserContext";
-import MainPage from "./components/MainPage";
-import ProductsPage from "./components/ProductsPage";
-import CartPage from "./components/CartPage";
-import AttendancePage from "./components/AttendanceListPage";
+import MainPage from "./pages/MainPage";
+import ProductsPage from "./pages/ProductsPage";
+import CartPage from "./pages/CartPage";
+import AttendancePage from "./pages/AttendanceListPage";
 import { ToastContainer } from "react-toastify";
 
 function App() {

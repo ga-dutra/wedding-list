@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import foto_perfil from "../assets/img/foto_perfil_monte_verde.jpg";
 import foto_retrato from "../assets/img/foto_retrato_monte_verde.jpg";
-import TopBar from "./TopBar";
+import TopBar from "../components/TopBar";
 
 export default function MainPage() {
     return (

@@ -21,7 +21,6 @@ export default function ProductCard({productName, price, img}) {
       };
       setCart(prevCart => [...prevCart, newCartItem]);
     }
-    console.log(cart);
     navigate("/carrinho");
   }
 

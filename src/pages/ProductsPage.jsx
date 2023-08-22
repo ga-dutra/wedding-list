@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import products from "../assets/products/products";
-import ProductCard from "./ProductCard";
-import TopBar from "./TopBar";
+import ProductCard from "../components/ProductCard";
+import TopBar from "../components/TopBar";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 

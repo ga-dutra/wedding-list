@@ -1,24 +1,37 @@
 import { styled } from "styled-components";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import TopBar from "./TopBar";
+import TopBar from "../components/TopBar";
 import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
+import api from "../services/api.js";
+import axios from "axios";
+import LoadingAnimation from "../components/LoadingAnimation";
 
 export default function AttendancePage() {
   const [isGoing, setIsGoing] = useState(true);
   const [buttonBackgroundColor, setButtonBackgroundColor] = useState("#383333");
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     phone: "",
     isGoing: true,
+    companion: 0,
   });
+
   async function sendAttendance() {
     if (!form.name || !form.phone) {
       return toast.error("Por favor preencha os dados corretamente antes de enviar!");
     }
+    const body = { ...form };
     try {
-      
+      const baseURL = "https://wedding-list-backend.vercel.app"
+      const confirmationList = await axios.post(`${baseURL}/users/confirmation`, form);
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        return toast.success("Presença confirmada com sucesso!");
+      }, 2000);
     } catch (error) {
       console.log(error);
       return error;  
@@ -37,17 +50,17 @@ export default function AttendancePage() {
         </svg>
       </MessageContainer>
       <FormContainer>
-        <input placeholder="Insira seu nome" onChange={(e) => setForm({ ...form, name: e.target.value })}></input>
+        <input required placeholder="Insira seu nome" onChange={(e) => setForm({ ...form, name: e.target.value })}></input>
         <AttendenceConfirmationContainer>
           <h5>Você irá ao evento ?</h5>
           <div>
-            <OptionContainer isGoing={isGoing} onClick={() => setIsGoing(!isGoing)}>
+            <OptionContainer isGoing={isGoing} onClick={() => setIsGoing(true)}>
               Sim
               <div>
                 <ion-icon name="checkmark-outline"></ion-icon>
               </div>
             </OptionContainer>
-            <OptionContainer isGoing={!isGoing} onClick={() => setIsGoing(!isGoing)}>
+            <OptionContainer isGoing={!isGoing} onClick={() => setIsGoing(false)}>
               Não
               <div>
                 <ion-icon name="close-outline"></ion-icon>
@@ -55,9 +68,24 @@ export default function AttendancePage() {
             </OptionContainer>
           </div>
         </AttendenceConfirmationContainer>
-        <input placeholder="Celular" type="tel" onChange={(e) => setForm({ ...form, phone: e.target.value })}></input>
-        <ConfirmAttendance onMouseEnter={() => setButtonBackgroundColor("#272424")} onMouseLeave={() => setButtonBackgroundColor("#383333")} backgroundColor={buttonBackgroundColor} onClick={sendAttendance}>
-          Responder
+        <input required placeholder="Celular" type="tel" onChange={(e) => setForm({ ...form, phone: e.target.value })}></input>
+        {isGoing && 
+        <AcompanhantesContainer>
+          <h3>Quantos acompanhantes?</h3>
+          <AcompanhantesAdding>
+            <h4>Acompanhantes</h4>
+            <div>
+              <AddingCircularContainer companion={form.companion} onClick={() => {
+                if (form.companion >= 1) setForm({ ...form, companion: form.companion - 1 });
+              }}>-</AddingCircularContainer>
+              <AcompanhantesNumber companion={form.companion}>{form.companion}</AcompanhantesNumber>
+              <AddingCircularContainer onClick={() => setForm({ ...form, companion: form.companion + 1 })}>+</AddingCircularContainer>
+            </div>
+          </AcompanhantesAdding>
+        </AcompanhantesContainer>}
+        <ConfirmAttendance onMouseEnter={() => setButtonBackgroundColor("#272424")} onMouseLeave={() => setButtonBackgroundColor("#383333")} backgroundColor={buttonBackgroundColor} onClick={sendAttendance}
+        disabled={loading} loading={loading}>
+          { !loading ? "Responder" : <LoadingAnimation />}
         </ConfirmAttendance>
       </FormContainer>
     </Container>
@@ -129,9 +157,6 @@ const AttendenceConfirmationContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  h5 {
-
-  }
   div {
     display: flex;
   }
@@ -141,18 +166,22 @@ const OptionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 12px;
+
   div {
     width: 20px;
     height: 20px;
     background-color: #fff;
     border: 1px solid #000;
     border-radius: 50%;
-    margin-left: 6px;
+    margin-left: 5px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  div:nth-child(1) {
+    margin-right: 10px;
   }
 
   ion-icon {
@@ -171,7 +200,61 @@ const ConfirmAttendance = styled.div`
   color: ${(props) => props.color};
   border: 1px solid #383333;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: ${(props) => props.loading ? "wait" : "pointer"};  
   color: #ffffff;
   font-size: 16px;
+  pointer-events: ${(props) => props.loading ? "none" : "inherit"};  
+`;
+
+const AcompanhantesContainer = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+
+  h3 {
+    font-size: 16px;
+  }
+`;
+
+const AcompanhantesAdding = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  h4 {
+    font-size: 15px;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+`;
+
+const AddingCircularContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+  background-color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: ${(props) => (props.companion === 0 ? "0.6" : "1")};
+`;
+
+const AcompanhantesNumber = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #000;
+  margin: 0 10px;
+  opacity: ${(props) => (props.companion === 0 ? "0.6" : "1")};
 `;
