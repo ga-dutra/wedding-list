@@ -1,12 +1,36 @@
+import { useContext } from "react";
 import { styled } from "styled-components";
+import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCard({productName, price, img}) {
+  const {cart, setCart} = useContext(UserContext);
+  const navigate = useNavigate();
+  function addToCart() {
+    const existingProductIndex = cart.findIndex(item => item.productName === productName);
+    if (existingProductIndex !== -1) {
+      const updatedCart = [...cart];
+      updatedCart[existingProductIndex].qtd += 1;
+      setCart(updatedCart);
+    } else {
+      const newCartItem = {
+        productName,
+        price,
+        img,
+        qtd: 1
+      };
+      setCart(prevCart => [...prevCart, newCartItem]);
+    }
+    console.log(cart);
+    navigate("/carrinho");
+  }
+
   return (
     <ProductContainer>
       <img src={img} alt={`Imagem do produto: ${productName}`} />
       <h1>{productName}</h1>
       <h2>R$ {price},00</h2>
-      <BuyingButton>Comprar</BuyingButton>
+      <BuyingButton onClick={addToCart}>Comprar</BuyingButton>
     </ProductContainer>
   );
 };

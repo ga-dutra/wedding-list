@@ -63,6 +63,12 @@ body, html {
 	margin-top: 20px;
 	font-family: 'Comfortaa', cursive;
 }
+textarea:focus,
+input:focus,
+select:focus {
+  box-shadow: 0 0 0 0;
+  outline: 0;
+}
 `;
 
 export default GlobalStyle;

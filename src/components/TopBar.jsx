@@ -26,17 +26,18 @@ export default function TopBar() {
   return (
     <Container>
       <TopBarTitle>G & G</TopBarTitle>
-      <MenuContainer>
-        <h1 onClick={toggleMenu}>MENU</h1>
+      <MenuContainer onClick={toggleMenu}>
+        <h1 >MENU</h1>
         <AnimatedIcon
-          onClick={toggleMenu}
           name={isIconRotated ? "close-outline" : "menu-outline"}
           style={iconRotation}
         />
         <AnimatedMenu style={menuAnimation}>
           <MenuContent>
-            <MenuOption name={"Página Inicial"}></MenuOption>
-            <MenuOption name={"Lista de presentes"}></MenuOption>
+            <MenuOption name={"Página Inicial"} iconName={"home-outline"}></MenuOption>
+            <MenuOption name={"Lista de presentes"} iconName={"gift-outline"}></MenuOption>
+            <MenuOption name={"Carrinho"} iconName={"cart-outline"}></MenuOption>
+            <MenuOption name={"Confirmação de presença"} iconName={"checkmark-circle-outline"}></MenuOption>
           </MenuContent>
         </AnimatedMenu>
       </MenuContainer>
@@ -67,16 +68,18 @@ const TopBarTitle = styled.h1`
 
 const MenuContainer = styled.div`
   display: flex;
+  height: 100%;
   align-items: center;
   justify-content: center;
   margin-right: 30px;
+  cursor: pointer;
   h1 {
     font-size: 17px;
     margin-top: 2px;
   }
   ion-icon {
     font-size: 30px;
-    margin-left: 6px;
+    margin-left: 4px;
   }
 `;
 
@@ -88,7 +91,7 @@ const MenuContent = styled.div`
 
 const AnimatedMenu = styled(animated.div)`
   position: absolute;
-  width: 260px;
+  width: 440px;
   background-color: #D8E2DC;
   transition: transform 0.1s ease;
   z-index: 500;
@@ -97,15 +100,20 @@ const AnimatedMenu = styled(animated.div)`
   opacity: 0.6;
 `;
 
-function MenuOption({ name }) {
+function MenuOption({ name, iconName }) {
   const navigate = useNavigate();
-  const {setPageSelected} = useContext(UserContext);
+  const {pageSelected, setPageSelected} = useContext(UserContext);
   return (
-    <OptionContainer onClick={() => {
+    <OptionContainer pageSelected={pageSelected} name={name} onClick={() => {
       setPageSelected(name);
       if (name === "Página Inicial") navigate("/");
       else if (name === "Lista de presentes") navigate("/lista");
-    }}>{name}</OptionContainer>
+      else if (name === "Carrinho") navigate("/carrinho");
+      else if (name === "Confirmação de presença") navigate("/presenca");
+    }}>
+      <ion-icon name={iconName}></ion-icon>
+      <h3>{name}</h3>
+    </OptionContainer>
   );
 };
 
@@ -115,10 +123,22 @@ const OptionContainer = styled.div`
   display: flex;
   align-items: center;
   padding-left: 10px;
+  font-family: 'Comfortaa', cursive;
+
   background-color: #D8E2DC; /* Cor de fundo padrão */
   cursor: pointer;
   &:hover {
     background-color: #c0b8b8; /* Cor de fundo quando o cursor estiver sobre o componente */
-    font-weight: 600;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: ${(props) => (props.pageSelected === props.name ? "17px" : "16px")};
+    font-weight: ${(props) => (props.pageSelected === props.name ? "700" : "400")};
+  }
+
+  ion-icon {
+    font-size: ${(props) => (props.pageSelected === props.name ? "20px" : "19px")};
+    padding: 0 8px 2px 0;
   }
 `;
