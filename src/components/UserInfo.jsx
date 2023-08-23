@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingAnimation from "./LoadingAnimation";
+import axios from "axios";
 
-export function UserInformation() {
+export function UserInformation({ step, setStep }) {
   const {cart, setCart} = useContext(UserContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -28,7 +29,16 @@ export function UserInformation() {
 
   async function sendForm() {
     const baseURL = "https://wedding-list-backend.vercel.app"
-    // const userInfo = await axios.post(`${baseURL}/users/userInfo`, form);
+    const userInfo = await axios.post(`${baseURL}/users/userInfo`, form);
+    try {
+      setTimeout(() => {
+        setLoading(false);
+        return setStep(step + 1);
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+      return error;  
+    }
   }
 
   return (
@@ -72,7 +82,7 @@ const StageContainer = styled.div`
   height: 60px;
   background-color: #383333;
   border-radius: 4px;
-  margin-top: 80px;
+  margin-top: 100px;
   color: #fff;
 `;
 

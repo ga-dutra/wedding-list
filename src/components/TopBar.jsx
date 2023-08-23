@@ -97,7 +97,7 @@ const AnimatedMenu = styled(animated.div)`
   z-index: 500;
   height: auto; /* Altere o height para auto */
   top: 0;
-  opacity: 0.6;
+  opacity: 0.85;
 `;
 
 function MenuOption({ name, iconName }) {

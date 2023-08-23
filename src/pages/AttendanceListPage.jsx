@@ -7,6 +7,7 @@ import { UserContext } from "../context/UserContext";
 import api from "../services/api.js";
 import axios from "axios";
 import LoadingAnimation from "../components/LoadingAnimation";
+import { useNavigate } from "react-router-dom";
 
 export default function AttendancePage() {
   const [isGoing, setIsGoing] = useState(true);
@@ -18,6 +19,7 @@ export default function AttendancePage() {
     isGoing: true,
     companion: 0,
   });
+  const navigate = useNavigate();
 
   async function sendAttendance() {
     if (!form.name || !form.phone) {
@@ -30,7 +32,8 @@ export default function AttendancePage() {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-        return toast.success("Presença confirmada com sucesso!");
+        toast.success("Presença confirmada com sucesso!");
+        return navigate("/");
       }, 2000);
     } catch (error) {
       console.log(error);

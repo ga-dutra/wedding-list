@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserInformation } from "../components/UserInfo";
+import PixArea from "../components/PìxArea";
 
 export default function CartPage() {
   const {cart, setCart} = useContext(UserContext);
@@ -66,7 +67,7 @@ export default function CartPage() {
     return (
       <Container>
         <TopBar />
-        <UserInformation />
+        <UserInformation step={step} setStep={setStep}/>
         <AddMoreItemsButton color={secondButtonColor} backgroundColor={secondButtonBackgroundColor} onMouseEnter={() => {
           setSecondButtonBackgroundColor("#383333");
           setSecondButtonColor("#fff")
@@ -76,6 +77,16 @@ export default function CartPage() {
         }}
         onClick={() => navigate("/lista")}
         >Adicionar presentes</AddMoreItemsButton>
+        <Spacing />
+      </Container>
+    );
+  }
+
+  else if (step === 3) {
+    return (
+      <Container>
+        <TopBar />
+        <PixArea totalPrice={totalPrice} step={step} setStep={setStep}/>
         <Spacing />
       </Container>
     );
