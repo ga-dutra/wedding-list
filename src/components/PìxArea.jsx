@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
+import retrato from "../assets/img/foto_perfil_monte_verde.jpg";
 
 export default function PixArea({ totalPrice }) {
   const [chave, setChave] = useState('01e374f7-4484-4382-8182-687a138a783d');
@@ -20,10 +21,15 @@ export default function PixArea({ totalPrice }) {
     <>
       <StageContainer>3. Pagamento</StageContainer>
       <PixAreaContainer>
-      <h1>Área Pix</h1>
-      <h1>Valor: R$ {totalPrice},00</h1>
-      <h1>Chave: 01e374f7-4484-4382-8182-687a138a783d <span> <ion-icon onClick={handleCopyClick} name="copy-outline"></ion-icon> </span></h1>
-      <h1>Obrigado e esperamos por você!</h1>
+        <PixTextContainer>
+          <h1>Área Pix</h1>
+          <h1>Valor: R$ {totalPrice}{totalPrice % 1 === 0 ? ",00" : ""}</h1>
+          <h1>Chave: 01e374f7-4484-4382-8182-687a138a783d <span> <ion-icon onClick={handleCopyClick} name="copy-outline"></ion-icon> </span></h1>
+          <h1>Obrigado e esperamos por você!</h1>
+        </PixTextContainer>
+        {/* <RetratoContainer>
+          <img src={retrato} alt="Foto Retrato" />
+        </RetratoContainer> */}
     </PixAreaContainer>
     </>
   );
@@ -46,7 +52,6 @@ const PixAreaContainer = styled.div`
   height: 360px;
   background-color: #fff;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: 80px;
@@ -60,7 +65,29 @@ const PixAreaContainer = styled.div`
   ion-icon {
     cursor: pointer;
     font-size: 20px;
-    padding-left: 6px;
+    margin-right: 20px;
+    margin-left: -20px;
   }
-
 `;
+
+const RetratoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+
+  img {
+    width: 43vw;
+    object-fit: contain;
+  }
+`;
+
+const PixTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+`

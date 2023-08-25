@@ -16,7 +16,7 @@ export function UserInformation({ step, setStep }) {
   const [form, setForm] = useState({
     name: "",
     phone: "",
-    message: "",
+    message: "-",
     cartSelected: JSON.stringify(cart)
   });
   useEffect(() => {
@@ -40,6 +40,8 @@ export function UserInformation({ step, setStep }) {
       return error;  
     }
   }
+  let priceString = String(totalPrice).replace(".", ",");
+  if (priceString.indexOf(",") !== -1 && priceString.split(",")[1].length === 1) priceString += "0";
 
   return (
     <>
@@ -58,18 +60,18 @@ export function UserInformation({ step, setStep }) {
         </YourRequest>
         <Gifts>
           <h3>Presente(s)</h3>
-          <h3>R$ {totalPrice},00</h3>
+          <h3>R$ {priceString}{totalPrice % 1 === 0 ? ",00" : ""}</h3>
         </Gifts>
         <Total>
           <h3>Total</h3>
-          <h3>R$ {totalPrice},00</h3>
+          <h3>R$ {priceString}{totalPrice % 1 === 0 ? ",00" : ""}</h3>
         </Total>
       </SummaryContainer>
-      <NextStepButton loading={loading} backgroundColor={firstButtonBackgroundColor} onMouseEnter={() => setFirstButtonBackgroundColor("#272424")} onMouseLeave={() => setFirstButtonBackgroundColor("#383333")} onClick={() => {
-          if (!form.name || !form.phone || !form.message) return toast.error("Por favor preencha os dados corretamente antes de prosseguir!");
+      {form.name && form.phone &&<NextStepButton loading={loading} backgroundColor={firstButtonBackgroundColor} onMouseEnter={() => setFirstButtonBackgroundColor("#272424")} onMouseLeave={() => setFirstButtonBackgroundColor("#383333")} onClick={() => {
+          if (!form.name || !form.phone) return toast.error("Por favor preencha os dados corretamente antes de prosseguir!");
           setLoading(true);
           sendForm();
-        }}>{!loading ? "Próximo passo" : <LoadingAnimation />}</NextStepButton>
+        }}>{!loading ? "Próximo passo" : <LoadingAnimation />}</NextStepButton>}
     </>
   )
 }
@@ -88,6 +90,7 @@ const StageContainer = styled.div`
 
 const SubInformation = styled.h1`
   margin-top: 50px;
+  text-align: center;
 `;
 
 const FormContainer = styled.div`

@@ -25,6 +25,9 @@ export default function CartPage() {
     setTotalPrice(newPrice);
   }, [cart]);
 
+  let priceString = String(totalPrice).replace(".", ",");
+  if (priceString.indexOf(",") !== -1 && priceString.split(",")[1].length === 1) priceString += "0";
+
   if (step === 1) {
     return (
       <Container>
@@ -43,13 +46,13 @@ export default function CartPage() {
           }
           <TotalPrice>
             <h1>Total</h1>
-            <h1>R$ {totalPrice},00</h1>
+            <h1>R$ {priceString}{totalPrice % 1 === 0 ? ",00" : ""}</h1>
           </TotalPrice>
         </CartContainer>
-        <NextStepButton backgroundColor={firstButtonBackgroundColor} onMouseEnter={() => setFirstButtonBackgroundColor("#272424")} onMouseLeave={() => setFirstButtonBackgroundColor("#383333")} onClick={() => {
+        {cart.length !== 0 && <NextStepButton backgroundColor={firstButtonBackgroundColor} onMouseEnter={() => setFirstButtonBackgroundColor("#272424")} onMouseLeave={() => setFirstButtonBackgroundColor("#383333")} onClick={() => {
           if (cart.length !== 0) setStep(2);
           else return toast.error("Seu carrinho está vazio!");
-        }}>Próximo passo</NextStepButton>
+        }}>Próximo passo</NextStepButton>}
         <AddMoreItemsButton color={secondButtonColor} backgroundColor={secondButtonBackgroundColor} onMouseEnter={() => {
           setSecondButtonBackgroundColor("#383333");
           setSecondButtonColor("#fff")
@@ -128,6 +131,10 @@ function CartItem({ product }) {
     }
     setCart(products);
   }
+
+  let priceString = String(product.price * product.qtd).replace(".", ",");
+  if (priceString.indexOf(",") !== -1 && priceString.split(",")[1].length === 1) priceString += "0";
+
   return (
     <CartItemContainer>
       <ItemFirstRow>
@@ -146,7 +153,7 @@ function CartItem({ product }) {
       </ItemFirstRow>
       <ItemPrice>
         <h1>Valor</h1>
-        <h1>R$ {product.price * product.qtd},00</h1>
+        <h1>R$ {priceString}{product.price * product.qtd % 1 === 0 ? ",00" : ""}</h1>
       </ItemPrice>
     </CartItemContainer>
   );

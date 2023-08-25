@@ -24,11 +24,15 @@ export default function ProductCard({productName, price, img}) {
     navigate("/carrinho");
   }
 
+  let priceString = String(price).replace(".", ",");
+  if (priceString.indexOf(",") !== -1 && priceString.split(",")[1].length === 1) priceString += "0";
+
   return (
+
     <ProductContainer>
       <img src={img} alt={`Imagem do produto: ${productName}`} />
       <h1>{productName}</h1>
-      <h2>R$ {price},00</h2>
+      <h2>R$ {priceString}{price % 1 === 0 ? ",00" : ""}</h2>
       <BuyingButton onClick={addToCart}>Comprar</BuyingButton>
     </ProductContainer>
   );
@@ -36,26 +40,31 @@ export default function ProductCard({productName, price, img}) {
 
 const ProductContainer = styled.div`
   display: flex;
-  width: 280px;
-  height: 460px;
+  width: 260px;
+  height: 420px;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   border: 2px solid #f2f2f2;
   border-radius: 4px;
+  text-align: center;
+  line-height: 23px;
+  font-family: 'Didact Gothic', sans-serif;
   img {
-    width: 180px;
+    width: 160px;
+    max-height: 220px;
     object-fit: contain;
   }
 
   h1 {
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 400;
-
+    max-width: 90%;
   }
   h2 {
     font-size: 18px;
     font-weight: 600;
+    max-width: 95%;
   }
 
   h1, h2 {
