@@ -2,8 +2,13 @@ import { styled } from "styled-components";
 import foto_perfil from "../assets/img/foto_perfil_monte_verde.jpg";
 import foto_retrato from "../assets/img/foto_retrato_monte_verde.jpg";
 import TopBar from "../components/TopBar";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 export default function MainPage() {
+  const { setPageSelected } = useContext(UserContext);
+  const navigate = useNavigate();
     return (
       <Container>
         <TopBar />
@@ -19,6 +24,10 @@ export default function MainPage() {
           <svg xmlns="http://www.w3.org/2000/svg" width="160" height="79">
             <path d="M134.593 38.513l-5.204 1.301-5.201-1.301-5.203 1.301-5.2-1.301-5.199 1.301-5.199-1.301-5.202 1.301-5.199-1.301-5.201 1.301-5.2-1.301-5.2 1.301-5.2-1.301-5.199 1.301-5.2-1.301-5.198 1.301-5.199-1.301-5.198 1.301-5.197-1.301-5.197 1.301-5.199-1.301-5.197 1.301-4.996-1.251-.405 1.56 5.401 1.352 5.197-1.301 5.199 1.301 5.196-1.301 5.198 1.301 5.198-1.301 5.199 1.301 5.198-1.301 5.2 1.301 5.199-1.301 5.2 1.301 5.2-1.301 5.2 1.301 5.201-1.301 5.199 1.301 5.202-1.301 5.199 1.301 5.199-1.301 5.2 1.301 5.203-1.301 5.201 1.301 5.204-1.301 5.002 1.25.405-1.558v-.002z" fill="#38485D" fillRule="evenodd"></path>
           </svg>
+          <NextStepButton onClick={() => {
+          navigate("/lista");
+          setPageSelected("Lista de presentes");
+        }}>Ver presentes</NextStepButton>
         </KitchenListContainer>
       </Container>
     );
@@ -66,4 +75,17 @@ const CouplePictureContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
+`;
+
+const NextStepButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  width: 90%;
+  height: 60px;
+  background-color: #383333;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;  
 `;

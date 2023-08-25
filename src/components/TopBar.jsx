@@ -72,6 +72,7 @@ const MenuContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 30px;
+  z-index: 10;
   cursor: pointer;
   h1 {
     font-size: 17px;

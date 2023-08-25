@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserInformation } from "../components/UserInfo";
-import PixArea from "../components/PìxArea";
+import PixArea from "../components/PixArea";
 
 export default function CartPage() {
-  const {cart, setCart} = useContext(UserContext);
+  const {cart, setCart, setPageSelected} = useContext(UserContext);
+  setPageSelected("Carrinho");
   const navigate = useNavigate();
   const [firstButtonBackgroundColor, setFirstButtonBackgroundColor] = useState("#383333");
   const [secondButtonBackgroundColor, setSecondButtonBackgroundColor] = useState("#FFCAD4");
@@ -276,6 +277,7 @@ const AddMoreItemsButton = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 40px;
+  margin-bottom: 60px;
   width: 90%;
   height: 60px;
   background-color: ${(props) => props.backgroundColor};  
