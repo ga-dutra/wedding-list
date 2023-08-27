@@ -5,7 +5,7 @@ import { useState } from "react";
 import retrato from "../assets/img/foto_perfil_monte_verde.jpg";
 import QRCode from 'qrcode.react';
 
-export default function PixArea({ totalPrice }) {
+export default function PixArea({ totalPrice, priceString }) {
   const [chave, setChave] = useState('00020126580014BR.GOV.BCB.PIX013604bb63f8-f25b-46ae-ba48-8be4550cea175204000053039865802BR5915Giovana La Luna6009SAO PAULO61080540900062250521Lav8fljbLA6eBma1h4ysg63042EC7');
   
   const handleCopyClick = () => {
@@ -25,7 +25,7 @@ export default function PixArea({ totalPrice }) {
       <PixAreaContainer>
         <PixTextContainer>
           <h1>Área Pix</h1>
-          <h1>Valor: R$ {totalPrice}{totalPrice % 1 === 0 ? ",00" : ""}</h1>
+          <h1>Valor: R$ {priceString}{totalPrice % 1 === 0 ? ",00" : ""}</h1>
           <QRCode value={chave} size={140} />
           <KeyContainer>
             <h1>Chave: {chave}</h1>

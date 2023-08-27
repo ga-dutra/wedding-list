@@ -40,7 +40,7 @@ export function UserInformation({ step, setStep }) {
       return error;  
     }
   }
-  let priceString = String(totalPrice).replace(".", ",");
+  let priceString = String(totalPrice.toFixed(2)).replace(".", ",");
   if (priceString.indexOf(",") !== -1 && priceString.split(",")[1].length === 1) priceString += "0";
 
   return (
@@ -67,11 +67,11 @@ export function UserInformation({ step, setStep }) {
           <h3>R$ {priceString}{totalPrice % 1 === 0 ? ",00" : ""}</h3>
         </Total>
       </SummaryContainer>
-      {form.name && form.phone &&<NextStepButton loading={loading} backgroundColor={firstButtonBackgroundColor} onMouseEnter={() => setFirstButtonBackgroundColor("#272424")} onMouseLeave={() => setFirstButtonBackgroundColor("#383333")} onClick={() => {
+      <NextStepButton loading={loading} backgroundColor={firstButtonBackgroundColor} onMouseEnter={() => setFirstButtonBackgroundColor("#272424")} onMouseLeave={() => setFirstButtonBackgroundColor("#383333")} onClick={() => {
           if (!form.name || !form.phone) return toast.error("Por favor preencha os dados corretamente antes de prosseguir!");
           setLoading(true);
           sendForm();
-        }}>{!loading ? "Próximo passo" : <LoadingAnimation />}</NextStepButton>}
+        }}>{!loading ? "Próximo passo" : <LoadingAnimation />}</NextStepButton>
     </>
   )
 }

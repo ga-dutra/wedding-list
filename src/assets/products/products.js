@@ -1,5 +1,4 @@
 import aspirador from "../img/products/Aspirador de pó vertical.png";
-import balanca from "../img/products/Balança para Alimentos.png";
 import cafeteira_eletrica from "../img/products/Cafeteira Elétrica.png";
 import cafeteira_italiana from "../img/products/Cafeteira Italiana de Alumínio 600ml .png";
 import chaleira from "../img/products/Chaleira Inox com Apito.png";
@@ -26,15 +25,12 @@ import jogo_frigideiras from "../img/products/Jogo de Frigideiras Alumínio 2 Pe
 import jogo_panelas from "../img/products/Jogo de Panelas Tramontina Inox.png";
 import jogo_potes from "../img/products/Jogo de Potes para Mantimentos 5 Peças com tampa Rosca Preta.png";
 import jogo_talheres from "../img/products/Jogo de Talheres Inox 24 Peças.png";
-import jogo_tigelas from "../img/products/Jogo de Tigelas de Vidro Hermético 5 Peças.png";
 import jogo_toalhas from "../img/products/Jogo de Toalhas 5 Peças.png";
 import jogo_tacas from "../img/products/Jogo Taças de Vidro para Sobremesa 6 Peças 200ml.png";
 import kit_descanso from "../img/products/Kit Descanso de Panela 4 Peças.png";
 import kit_faca from "../img/products/Kit Faca de Pão+Tesoura Cozinha.png";
 import kit_potes from "../img/products/Kit Potes de Plástico Hermético 4 Unidades.png";
 import kit_vassoura from "../img/products/Kit Vassoura+Rodo+Pá+Balde Transparente.png";
-import lasanheira from "../img/products/Lasanheira de Vidro Grande 5L.png";
-import leiteira from "../img/products/Leiteira de Alumínio Antiaderente.png";
 import liquidificados from "../img/products/Liquidificador 1200W.png";
 import lixeira from "../img/products/Lixeira Inox com Pedal 5L.png";
 import processador from "../img/products/Mini Processador de Alimentos.png";
@@ -48,12 +44,13 @@ import porta_temperos from "../img/products/Porta Temperos e Condimentos Inox Ma
 import relogio from "../img/products/Relógio de Parede Cozinha.png";
 import sanduicheira from "../img/products/Sanduicheira Inox 900W.png";
 import varal_de_chao from "../img/products/Varal de Chão 3 Andares.png";
-import varal_inox from "../img/products/Varal Inox Suspenso Meias e Roupa Íntima.png";
 import ventilador from "../img/products/Ventilador de Mesa.png";
+import pipoqueira_elétrica from "../img/products/Pipoqueira Elétrica.jpg"
+import sousplat from "../img/products/Jogo de Sousplat.jpg"
+import jogo_lençol from "../img/products/Jogo de Lençol Queen.jpg"
 
 const products = [
 { img: aspirador, name: "Aspirador de pó vertical", price: 249},
-{ img: balanca, name: "Balança para Alimentos", price: 67.90},
 { img: cafeteira_eletrica, name: "Cafeteira Elétrica", price: 159.99},
 { img: cafeteira_italiana, name: "Cafeteira Italiana de Alumínio 600ml", price: 84.90},
 { img: chaleira, name: "Chaleira Inox com Apito", price: 115.50},
@@ -80,15 +77,12 @@ const products = [
 { img: jogo_panelas, name: "Jogo de Panelas Tramontina Inox", price: 255.90},
 { img: jogo_potes, name: "Jogo de Potes para Mantimentos 5 Peças com tampa Rosca Preta", price: 39.99},
 { img: jogo_talheres, name: "Jogo de Talheres Inox 24 Peças", price: 78.99},
-{ img: jogo_tigelas, name: "Jogo de Tigelas de Vidro Hermético 5 Peças", price: 63.90},
 { img: jogo_toalhas, name: "Jogo de Toalhas 5 Peças", price: 190.90},
 { img: jogo_tacas, name: "Jogo Taças de Vidro para Sobremesa 6 Peças 200ml", price: 72.90},
 { img: kit_descanso, name: "Kit Descanso de Panela 4 Peças", price: 49.90},
 { img: kit_faca, name: "Kit Faca de Pão + Tesoura Cozinha", price: 55.90},
 { img: kit_potes, name: "Kit Potes de Plástico Hermético 4 Unidades", price: 49.90},
 { img: kit_vassoura, name: "Kit Vassoura+Rodo+Pá+Balde Transparente", price: 65.50},
-{ img: lasanheira, name: "Lasanheira de Vidro Grande 5L", price: 39.90},
-{ img: leiteira, name: "Leiteira de Alumínio Antiaderente", price: 62.90},
 { img: liquidificados, name: "Liquidificador 1200W", price: 179.90},
 { img: lixeira, name: "Lixeira Inox com Pedal 5L", price: 87.50},
 { img: processador, name: "Mini Processador de Alimentos", price: 93.00},
@@ -102,7 +96,10 @@ const products = [
 { img: relogio, name: "Relógio de Parede Cozinha", price: 71.90},
 { img: sanduicheira, name: "Sanduicheira Inox 900W", price: 159.90},
 { img: varal_de_chao, name: "Varal de Chão 3 Andares", price: 139.90},
-{ img: varal_inox, name: "Varal Inox Suspenso Meias e Roupa Íntima", price: 45.50},
-{ img: ventilador, name: "Ventilador de Mesa", price: 220.00}];
+{ img: ventilador, name: "Ventilador de Mesa", price: 220.00},
+{ img: jogo_lençol, name: "Jogo de Lençol Queen", price: 190.80},
+{ img: pipoqueira_elétrica, name: "Pipoqueira Elétrica", price: 149.90},
+{ img: sousplat, name: "Jogo de Sousplat", price: 180.90},
+];
 
 export default products;

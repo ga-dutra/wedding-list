@@ -26,7 +26,7 @@ export default function CartPage() {
     setTotalPrice(newPrice);
   }, [cart]);
 
-  let priceString = String(totalPrice).replace(".", ",");
+  let priceString = String(totalPrice.toFixed(2)).replace(".", ",");
   if (priceString.indexOf(",") !== -1 && priceString.split(",")[1].length === 1) priceString += "0";
 
   if (step === 1) {
@@ -90,7 +90,7 @@ export default function CartPage() {
     return (
       <Container>
         <TopBar />
-        <PixArea totalPrice={totalPrice} step={step} setStep={setStep}/>
+        <PixArea priceString={priceString} totalPrice={totalPrice} step={step} setStep={setStep}/>
         <Spacing />
       </Container>
     );
@@ -133,7 +133,7 @@ function CartItem({ product }) {
     setCart(products);
   }
 
-  let priceString = String(product.price * product.qtd).replace(".", ",");
+  let priceString = String((product.price * product.qtd).toFixed(2)).replace(".", ",");
   if (priceString.indexOf(",") !== -1 && priceString.split(",")[1].length === 1) priceString += "0";
 
   return (
