@@ -24,7 +24,7 @@ export default function ProductCard({productName, price, img}) {
     navigate("/carrinho");
   }
 
-  let priceString = String(price).replace(".", ",");
+  let priceString = String(price.toFixed(2)).replace(".", ",");
   if (priceString.indexOf(",") !== -1 && priceString.split(",")[1].length === 1) priceString += "0";
 
   return (

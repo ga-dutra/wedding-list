@@ -35,7 +35,7 @@ export default function PixArea({ totalPrice, priceString }) {
             <h1>Chave: {chave}</h1>
             <ion-icon onClick={handleCopyClick} name="copy-outline"></ion-icon>
           </KeyContainer>
-          <h2>Atenção!</h2>
+          <h2><span>Atenção!</span></h2>
           <h3>O código pix virá com valor zerado. Pedimos que você insira o valor correspondente ao{extraString} seu{extraString} presente{extraString} antes de realizar a transferência.</h3>
           <h2>Obrigado e esperamos por você!</h2>
         </PixTextContainer>
@@ -97,6 +97,9 @@ const PixAreaContainer = styled.div`
 
   h3 {
     padding: 0 4px;
+  }
+  span {
+    color: #cf1717;
   }
 `;
 
