@@ -21,7 +21,7 @@ export default function MainPage() {
             <h2>Gostaríamos de convidar você a participar do nosso chá de cozinha!</h2>
             <h3>Data: 23/09/2023</h3>
             <h3>Horário: 15h</h3>
-            <h3>Endereço: Avenida de Cillos, 1722. Jardim São Francisco, Santa Bárbara do Oeste - SP.</h3>
+            <h3>Endereço: Avenida de Cillo, 1722. Jardim São Francisco, Santa Bárbara do Oeste - SP.</h3>
             <h4>Venha fazer parte desse momento especial. Esperamos você!</h4>
           </div>
           <svg xmlns="http://www.w3.org/2000/svg" width="160" height="79">
