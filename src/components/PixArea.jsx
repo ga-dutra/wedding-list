@@ -1,13 +1,17 @@
 import { styled } from "styled-components";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import retrato from "../assets/img/foto_perfil_monte_verde.jpg";
 import QRCode from 'qrcode.react';
+import { UserContext } from "../context/UserContext";
 
 export default function PixArea({ totalPrice, priceString }) {
+  const { cart } = useContext(UserContext);
   const [chave, setChave] = useState('00020126580014BR.GOV.BCB.PIX013604bb63f8-f25b-46ae-ba48-8be4550cea175204000053039865802BR5915Giovana La Luna6009SAO PAULO61080540900062250521Lav8fljbLA6eBma1h4ysg63042EC7');
-  
+
+  const cartLenght = cart?.length || 1;
+  const extraString = cartLenght > 1 ? "s" : "";
   const handleCopyClick = () => {
 
     const tempInput = document.createElement('input');
@@ -25,12 +29,14 @@ export default function PixArea({ totalPrice, priceString }) {
       <PixAreaContainer>
         <PixTextContainer>
           <h1>Área Pix</h1>
-          <h1>Valor: R$ {priceString}</h1>
+          <h1>Valor: <span>R$ {priceString} </span></h1>
           <QRCode value={chave} size={140} />
           <KeyContainer>
             <h1>Chave: {chave}</h1>
             <ion-icon onClick={handleCopyClick} name="copy-outline"></ion-icon>
           </KeyContainer>
+          <h2>Atenção!</h2>
+          <h3>O código pix virá com valor zerado. Pedimos que você insira o valor correspondente ao{extraString} seu{extraString} presente{extraString} antes de realizar a transferência.</h3>
           <h2>Obrigado e esperamos por você!</h2>
         </PixTextContainer>
         {/* <RetratoContainer>
@@ -69,21 +75,28 @@ const StageContainer = styled.div`
   height: 60px;
   background-color: #383333;
   border-radius: 4px;
-  margin-top: 80px;
+  margin-top: 60px;
   color: #fff;
 `;
 
 const PixAreaContainer = styled.div`
   width: 100vw;
-  height: 500px;
+  height: 580px;
   background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 80px;
+  margin-top: 50px;
+  h1 {
+    font-size: 17.25px;
+  }
   h1:nth-child(2n) {
     font-size: 18px;
     font-weight: 500;
+  }
+
+  h3 {
+    padding: 0 4px;
   }
 `;
 
@@ -112,5 +125,9 @@ const PixTextContainer = styled.div`
   h2 {
     font-weight: 700;
     font-size: 18px;
+  }
+
+  span {
+    font-weight: 600;
   }
 `
