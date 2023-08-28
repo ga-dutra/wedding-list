@@ -60,11 +60,11 @@ export function UserInformation({ step, setStep }) {
         </YourRequest>
         <Gifts>
           <h3>Presente(s)</h3>
-          <h3>R$ {priceString}{totalPrice % 1 === 0 ? ",00" : ""}</h3>
+          <h3>R$ {priceString}</h3>
         </Gifts>
         <Total>
           <h3>Total</h3>
-          <h3>R$ {priceString}{totalPrice % 1 === 0 ? ",00" : ""}</h3>
+          <h3>R$ {priceString}</h3>
         </Total>
       </SummaryContainer>
       <NextStepButton loading={loading} backgroundColor={firstButtonBackgroundColor} onMouseEnter={() => setFirstButtonBackgroundColor("#272424")} onMouseLeave={() => setFirstButtonBackgroundColor("#383333")} onClick={() => {

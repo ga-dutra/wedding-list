@@ -25,7 +25,7 @@ export default function PixArea({ totalPrice, priceString }) {
       <PixAreaContainer>
         <PixTextContainer>
           <h1>Área Pix</h1>
-          <h1>Valor: R$ {priceString}{totalPrice % 1 === 0 ? ",00" : ""}</h1>
+          <h1>Valor: R$ {priceString}</h1>
           <QRCode value={chave} size={140} />
           <KeyContainer>
             <h1>Chave: {chave}</h1>

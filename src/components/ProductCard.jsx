@@ -32,7 +32,7 @@ export default function ProductCard({productName, price, img}) {
     <ProductContainer>
       <img src={img} alt={`Imagem do produto: ${productName}`} />
       <h1>{productName}</h1>
-      <h2>R$ {priceString}{price % 1 === 0 ? ",00" : ""}</h2>
+      <h2>R$ {priceString}</h2>
       <BuyingButton onClick={addToCart}>Comprar</BuyingButton>
     </ProductContainer>
   );

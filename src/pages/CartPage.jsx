@@ -47,7 +47,7 @@ export default function CartPage() {
           }
           <TotalPrice>
             <h1>Total</h1>
-            <h1>R$ {priceString}{totalPrice % 1 === 0 ? ",00" : ""}</h1>
+            <h1>R$ {priceString}</h1>
           </TotalPrice>
         </CartContainer>
         {cart.length !== 0 && <NextStepButton backgroundColor={firstButtonBackgroundColor} onMouseEnter={() => setFirstButtonBackgroundColor("#272424")} onMouseLeave={() => setFirstButtonBackgroundColor("#383333")} onClick={() => {
@@ -154,7 +154,7 @@ function CartItem({ product }) {
       </ItemFirstRow>
       <ItemPrice>
         <h1>Valor</h1>
-        <h1>R$ {priceString}{product.price * product.qtd % 1 === 0 ? ",00" : ""}</h1>
+        <h1>R$ {priceString}</h1>
       </ItemPrice>
     </CartItemContainer>
   );
